@@ -14,11 +14,6 @@ import Fontisto from "@expo/vector-icons/Fontisto";
 import Entypo from "@expo/vector-icons/Entypo";
 
 const Weather = () => {
-  // <FontAwesome name="snowflake-o" size={24} color="black" /> snow
-  // <Feather name="sun" size={24} color="black" /> clear
-  // <Ionicons name="rainy" size={24} color="black" /> rain
-  // <Fontisto name="day-haze" size={24} color="black" /> haze
-  // <Entypo name="cloud" size={24} color="black" /> cloud
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,6 +34,13 @@ const Weather = () => {
 
   useEffect(() => {
     getWeatherData("London");
+    const iconOBJ = {
+      snow: <FontAwesome name="snowflake-o" size={24} color="black" />,
+      clear: <Feather name="sun" size={24} color="black" />,
+      rain: <Ionicons name="rainy" size={24} color="black" />,
+      haze: <Fontisto name="day-haze" size={24} color="black" />,
+      cloud: <Entypo name="cloud" size={24} color="black" />,
+    };
     if (weatherData != null) {
       console.log(weatherData);
     }
