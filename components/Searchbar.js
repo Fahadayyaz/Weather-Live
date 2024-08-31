@@ -15,6 +15,7 @@ export default Searchbar;
 
 const styles = StyleSheet.create({
   searchBar: {
+    marginTop: 200,
     flexDirection: "row",
     justifyContent: "space-between",
     borderWidth: 1.5,
