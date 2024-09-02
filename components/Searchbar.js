@@ -1,12 +1,29 @@
 import { View, Text, TextInput, StyleSheet, Dimensions } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Feather from "@expo/vector-icons/Feather";
 
-const Searchbar = () => {
+const Searchbar = (props) => {
+  const [name, setName] = useState("");
+
+  function cityNameHandler(cityName) {
+    setName(cityName);
+  }
+  function nameEnterHandler() {
+    props.cityName(name);
+  }
+
   return (
     <View style={styles.searchBar}>
-      <TextInput placeholder="Enter Your City Name" />
-      <Feather name="search" size={24} color="black" />
+      <TextInput
+        placeholder="Enter Your City Name"
+        onChangeText={cityNameHandler}
+      />
+      <Feather
+        name="search"
+        size={24}
+        color="black"
+        onPress={nameEnterHandler}
+      />
     </View>
   );
 };
