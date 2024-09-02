@@ -12,10 +12,23 @@ import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Entypo from "@expo/vector-icons/Entypo";
+import {
+  clear_day,
+  clear_night,
+  cloud_day,
+  cloud_night,
+  haze_day,
+  haze_night,
+  rain_day,
+  rain_night,
+  snow_day,
+  snow_night,
+} from "../assets/backgrounds/index";
 
-const Weather = () => {
+const Weather = (props) => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [icon, setIcon] = useState("");
 
   async function getWeatherData(cityName) {
     setLoading(true);
@@ -33,18 +46,41 @@ const Weather = () => {
   }
 
   useEffect(() => {
-    getWeatherData("London");
+    getWeatherData(props.cityName);
     const iconOBJ = {
-      snow: <FontAwesome name="snowflake-o" size={24} color="black" />,
-      clear: <Feather name="sun" size={24} color="black" />,
-      rain: <Ionicons name="rainy" size={24} color="black" />,
-      haze: <Fontisto name="day-haze" size={24} color="black" />,
-      cloud: <Entypo name="cloud" size={24} color="black" />,
+      snow: <FontAwesome name="snowflake-o" size={48} color="black" />,
+      clear: <Feather name="sun" size={48} color="black" />,
+      rain: <Ionicons name="rainy" size={48} color="black" />,
+      haze: <Fontisto name="day-haze" size={48} color="black" />,
+      cloud: <Entypo name="cloud" size={48} color="black" />,
     };
     if (weatherData != null) {
-      console.log(weatherData);
+      const now = new Date();
+      const sunrise = new Date(weatherData.sys.sunrise * 1000);
+      const sunset = new Date(weatherData.sys.sunrise * 1000);
+      const isDayTime = now > sunrise && now < sunset;
+
+      switch (weatherData.weather[0].main) {
+        case "Snow":
+          setIcon(iconOBJ.snow);
+          break;
+        case "Clear":
+          setIcon(iconOBJ.clear);
+          break;
+        case "Rain":
+          setIcon(iconOBJ.rain);
+          break;
+        case "Haze":
+          setIcon(iconOBJ.haze);
+          break;
+        case "Clouds":
+          setIcon(iconOBJ.cloud);
+          break;
+        default:
+          setIcon(iconOBJ.haze);
+      }
     }
-  }, []);
+  }, [props.cityName]);
 
   if (loading) {
     <ActivityIndicator size="large" />;
@@ -65,7 +101,7 @@ const Weather = () => {
             <Text>Temprature: {weatherData.main.temp}</Text>
           </View>
           <View>
-            <Text>Icon</Text>
+            <Text>{icon}</Text>
           </View>
         </View>
       </View>
