@@ -1,17 +1,35 @@
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+} from "react-native";
 import React, { useState } from "react";
 import Searchbar from "./components/Searchbar";
 import Weather from "./components/Weather";
 
 export default function App() {
   const [savedName, setSavedName] = useState("");
+  const [backgroundImg, setBackgroundImg] = useState("");
+
   function cityNameHandler(cityName) {
     setSavedName(cityName);
   }
+  function backgroundHandler(background) {
+    setBackgroundImg(background);
+    console.log(backgroundImg);
+  }
   return (
     <View style={styles.container}>
-      <Searchbar cityName={cityNameHandler} />
-      <Weather cityName={savedName} />
+      <ImageBackground
+        source={backgroundImg}
+        resizeMode="cover"
+        style={styles.container}
+      >
+        <Searchbar cityName={cityNameHandler} />
+        <Weather cityName={savedName} background={backgroundHandler} />
+      </ImageBackground>
     </View>
   );
 }
@@ -19,8 +37,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    width: Dimensions.get("screen").width,
   },
 });
