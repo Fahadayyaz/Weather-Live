@@ -29,6 +29,7 @@ const Weather = (props) => {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [icon, setIcon] = useState("");
+  const [background, setBackground] = useState("");
 
   async function getWeatherData(cityName) {
     setLoading(true);
@@ -63,22 +64,29 @@ const Weather = (props) => {
       switch (weatherData.weather[0].main) {
         case "Snow":
           setIcon(iconOBJ.snow);
+          isDayTime ? setBackground(snow_day) : setBackground(snow_night);
           break;
         case "Clear":
           setIcon(iconOBJ.clear);
+          isDayTime ? setBackground(clear_day) : setBackground(clear_night);
           break;
         case "Rain":
           setIcon(iconOBJ.rain);
+          isDayTime ? setBackground(rain_day) : setBackground(rain_night);
           break;
         case "Haze":
           setIcon(iconOBJ.haze);
+          isDayTime ? setBackground(haze_day) : setBackground(haze_night);
           break;
         case "Clouds":
           setIcon(iconOBJ.cloud);
+          isDayTime ? setBackground(cloud_day) : setBackground(cloud_night);
           break;
         default:
           setIcon(iconOBJ.haze);
+          isDayTime ? setBackground(haze_day) : setBackground(haze_night);
       }
+      props.background(background);
     }
   }, [props.cityName]);
 
