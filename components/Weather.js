@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-const API_KEY = "0cb673ded64d558cc8e4652e007745b3";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -24,6 +23,8 @@ import {
   snow_day,
   snow_night,
 } from "../assets/backgrounds/index";
+
+const API_KEY = "0cb673ded64d558cc8e4652e007745b3";
 
 const Weather = (props) => {
   const [weatherData, setWeatherData] = useState(null);
@@ -58,7 +59,7 @@ const Weather = (props) => {
     if (weatherData != null) {
       const now = new Date();
       const sunrise = new Date(weatherData.sys.sunrise * 1000);
-      const sunset = new Date(weatherData.sys.sunrise * 1000);
+      const sunset = new Date(weatherData.sys.sunset * 1000);
       const isDayTime = now > sunrise && now < sunset;
 
       switch (weatherData.weather[0].main) {
@@ -101,12 +102,16 @@ const Weather = (props) => {
   } else {
     return (
       <View>
-        <Text style={styles.deg}>{weatherData.wind.deg}°</Text>
+        <Text style={styles.deg}>
+          {(weatherData.main.temp - 273.15).toFixed(0)}°C
+        </Text>
         <Text style={styles.cityName}>{weatherData.name}</Text>
         <View style={styles.icon}>
           <View>
-            <Text>Humidity: {weatherData.main.humidity}</Text>
-            <Text>Temprature: {weatherData.main.temp}</Text>
+            <Text>Humidity: {weatherData.main.humidity}%</Text>
+            <Text>
+              Temperature: {(weatherData.main.temp - 273.15).toFixed(0)}°C
+            </Text>
           </View>
           <View>
             <Text>{icon}</Text>
