@@ -16,6 +16,7 @@ export default function App() {
   function cityNameHandler(cityName) {
     setSavedName(cityName);
   }
+
   function backgroundHandler(background) {
     setBackgroundImg(background);
     console.log(backgroundImg);
