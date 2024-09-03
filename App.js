@@ -11,7 +11,7 @@ import Weather from "./components/Weather";
 
 export default function App() {
   const [savedName, setSavedName] = useState("");
-  const [backgroundImg, setBackgroundImg] = useState("");
+  const [backgroundImg, setBackgroundImg] = useState(null); // Changed to null for conditional rendering
 
   function cityNameHandler(cityName) {
     setSavedName(cityName);
@@ -19,12 +19,13 @@ export default function App() {
 
   function backgroundHandler(background) {
     setBackgroundImg(background);
-    console.log(backgroundImg);
+    console.log({ backgroundImg });
   }
+
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={backgroundImg}
+        source={backgroundImg} // Use 'source' instead of 'background'
         resizeMode="cover"
         style={styles.container}
       >
