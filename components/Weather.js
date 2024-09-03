@@ -50,11 +50,11 @@ const Weather = (props) => {
   useEffect(() => {
     getWeatherData(props.cityName);
     const iconOBJ = {
-      snow: <FontAwesome name="snowflake-o" size={48} color="black" />,
-      clear: <Feather name="sun" size={48} color="black" />,
-      rain: <Ionicons name="rainy" size={48} color="black" />,
-      haze: <Fontisto name="day-haze" size={48} color="black" />,
-      cloud: <Entypo name="cloud" size={48} color="black" />,
+      snow: <FontAwesome name="snowflake-o" size={48} color="white" />,
+      clear: <Feather name="sun" size={48} color="white" />,
+      rain: <Ionicons name="rainy" size={48} color="white" />,
+      haze: <Fontisto name="day-haze" size={48} color="white" />,
+      cloud: <Entypo name="cloud" size={48} color="white" />,
     };
     if (weatherData != null) {
       const now = new Date();
@@ -102,14 +102,17 @@ const Weather = (props) => {
   } else {
     return (
       <View>
+        <View style={styles.background}></View>
         <Text style={styles.deg}>
           {(weatherData.main.temp - 273.15).toFixed(0)}°C
         </Text>
         <Text style={styles.cityName}>{weatherData.name}</Text>
         <View style={styles.icon}>
-          <View>
-            <Text>Humidity: {weatherData.main.humidity}%</Text>
-            <Text>
+          <View style={styles.temp}>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              Humidity: {weatherData.main.humidity}%
+            </Text>
+            <Text style={{ color: "white", fontSize: 20 }}>
               Temperature: {(weatherData.main.temp - 273.15).toFixed(0)}°C
             </Text>
           </View>
@@ -129,11 +132,12 @@ const styles = StyleSheet.create({
     fontSize: 80,
     textAlign: "center",
     marginTop: "30%",
-    color: "black",
+    color: "white",
   },
   cityName: {
     textAlign: "center",
     fontSize: 20,
+    color: "white",
   },
   icon: {
     flexDirection: "row",
@@ -141,5 +145,21 @@ const styles = StyleSheet.create({
     width: Dimensions.get("screen").width - 50,
     height: "50%",
     alignItems: "center",
+  },
+  temp: {
+    backgroundColor: "black",
+    padding: 20,
+    borderRadius: 10,
+    opacity: 0.5,
+  },
+  background: {
+    backgroundColor: "black",
+    width: "90%",
+    height: 150,
+    marginTop: 120,
+    alignSelf: "center",
+    position: "absolute",
+    borderRadius: 10,
+    opacity: 0.5,
   },
 });
