@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderWidth: 1.5,
-    borderColor: "black",
+    borderColor: "white",
     borderRadius: 10,
     borderColor: "gray",
     width: Dimensions.get("screen").width - 80,
