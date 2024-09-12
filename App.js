@@ -25,7 +25,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={backgroundImg} // Use 'source' instead of 'background'
+        source={backgroundImg}
         resizeMode="cover"
         style={styles.container}
       >
